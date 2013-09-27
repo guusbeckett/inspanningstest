@@ -18,7 +18,7 @@
 \tableofcontents
 \newpage
 \section{Inleiding}
-Met een inspanningstest wordt uw uithoudingsvermogen en getraindheid   nauwkeurig vastgelegd. Daarnaast geeft deze inspanningstest belangrijke informatie over hoe uw hart, spieren en longen (samen)werken.
+Met een inspanningstest wordt het uithoudingsvermogen en getraindheid van de testpersoon nauwkeurig vastgelegd. Daarnaast geeft deze inspanningstest belangrijke informatie over hoe zijn/haar hart, spieren en longen (samen)werken. In dit document behandelen we de \r{A}strandtest, deze test hebben we gekozen omdat deze het makkelijkst uit te voeren is met de middelen die we tot onze beschikking hebben. Ook is dit een test waarin \'e\'en van ons al eens geanticipeerd heeft.
 \newpage
 \section{\r{A}strandtest}
 \subsection{Warming-up}
@@ -26,7 +26,7 @@ De \r{A}strandtest begint met een warming up, tijdens deze warming up begint men
 \subsection{De test}
 Wanneer de warming-up uitgevoerd is begint de test van zes minuten. De fietser moet ook tijdens deze test proberen zijn aantal omwentelingen per minuut rond de 60 te houden. Na zes minuten wordt de hartslag gemeten en daarna mag de fietser op eigen tempo uitfietsen.
 \subsection{Resultaat}
-Om te berekenen wat de conditie is van de fietser moeten er nu een aantal berekeningen gedaan worden. Hiervoor zijn nodig:
+Om te berekenen wat de conditie van de fietser is, moeten er nu een aantal berekeningen gedaan worden. Hiervoor zijn nodig:
 \begin{itemize}
 \item De gemeten hartslag van de fietser aan het eind van de test
 \item Het gewicht van de fietser
@@ -35,5 +35,100 @@ Om te berekenen wat de conditie is van de fietser moeten er nu een aantal bereke
 \end{itemize}
 \newpage
 \section{Toepassing}
+\subsection{Voorbeeld code}
+\begin{verbatim}
+
+//JavaScript
+function bepaalAstrand(form)
+{
+ var tab  =  parseFloat(form.tabel.value);
+ var gew  =  parseFloat(form.gewicht.value);
+ var cor  =  parseFloat(form.correctie.options[form.correctie.selectedIndex].value);
+ var vmx;
+
+ if ( gew > 0)     // om foutmelding (NaN) te voorkomen
+ {
+  vmx = (tab * cor * 1000)/gew;
+  document.strand.elements[4].value = Math.round(vmx*10 )/10;
+ }
+
+}
+
+//C#
+public float bepaalAstrand(float tab, float gew, int cor)
+{
+    float vmx;
+    if (gew>0)    // om foutmelding (NaN) te voorkomen
+    {
+        vmx = (tab * cor * 1000)/gew;
+    }
+    return vmx*10/10z
+}
+
+\end{verbatim}
+\subsection{Wiskundige verantwoording}
+Gebaseerd op de hartslag die gemeten is tijdens het afnemen van de test wordt een getal uit tabel 1 verkregen, dit getal wordt gesteld als x.
+ 
+VO2max=(x*leeftijd*1000)/gewicht
+\subsection{Rekentabel}
+\begin{table}
+    \begin{tabular}{l|lllllllllll}
+    ~        & ~   & MAN & ~   & ~    & ~    & ~ & ~   & ~   & VROUW & ~   & ~   \\ \hline
+    watt     & 50  & 100 & 150 & 200  & 250  & ~ & 50  & 75  & 100   & 125 & 150 \\
+    kpm      & 300 & 600 & 900 & 1200 & 1500 & ~ & 300 & 450 & 600   & 750 & 900 \\ \hline
+    Hartslag & ~   & ~   & ~   & ~    & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    120      & 2.2 & 3.4 & 4.8 & ~    & ~    & ~ & 2.6 & 3.4 & 4.1   & 4.8 & ~   \\
+    121      & 2.2 & 3.4 & 4.7 & ~    & ~    & ~ & 2.5 & 3.3 & 4.0   & 4.8 & ~   \\
+    122      & 2.2 & 3.4 & 4.6 & ~    & ~    & ~ & 2.5 & 3.2 & 3.9   & 4.7 & ~   \\
+    123      & 2.1 & 3.4 & 4.6 & ~    & ~    & ~ & 2.4 & 3.1 & 3.9   & 4.6 & ~   \\
+    124      & 2.1 & 3.3 & 4.5 & 6.0  & ~    & ~ & 2.4 & 3.1 & 3.8   & 4.5 & ~   \\
+    125      & 2.0 & 3.3 & 4.4 & 5.9  & ~    & ~ & 2.3 & 3.0 & 3.7   & 4.4 & ~   \\
+    126      & 2.0 & 3.2 & 4.4 & 5.8  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    127      & 2.0 & 3.1 & 4.3 & 5.7  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    128      & 2.0 & 3.1 & 4.2 & 5.6  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    129      & 1.9 & 3.0 & 4.2 & 5.6  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    130      & 1.9 & 3.0 & 4.1 & 5.5  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    131      & 1.9 & 2.9 & 4.0 & 5.4  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    132      & 1.8 & 2.9 & 4.0 & 5.3  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    133      & 1.8 & 2.8 & 3.9 & 5.3  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    134      & 1.8 & 2.8 & 3.9 & 5.2  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    135      & 1.7 & 2.8 & 3.8 & 5.1  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    136      & 1.7 & 2.7 & 3.8 & 5.0  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    137      & 1.7 & 2.7 & 3.7 & 5.0  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    138      & 1.6 & 2.7 & 3.7 & 4.9  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    139      & 1.6 & 2.6 & 3.6 & 4.8  & ~    & ~ & ~   & ~   & ~     & ~   & ~   \\
+    140      & 1.6 & 2.6 & 3.6 & 4.8  & 6.0  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    141      & ~   & 2.6 & 3.5 & 4.7  & 5.9  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    142      & ~   & 2.5 & 3.5 & 4.6  & 5.8  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    143      & ~   & 2.5 & 3.4 & 4.6  & 5.7  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    144      & ~   & 2.5 & 3.4 & 4.5  & 5.7  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    145      & ~   & 2.4 & 3.4 & 4.5  & 5.6  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    146      & ~   & 2.4 & 3.3 & 4.4  & 5.6  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    147      & ~   & 2.4 & 3.3 & 4.4  & 5.5  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    148      & ~   & 2.4 & 3.2 & 4.3  & 5.4  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    149      & ~   & 2.3 & 3.2 & 4.3  & 5.4  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    150      & ~   & 2.3 & 3.2 & 4.2  & 5.3  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    151      & ~   & 2.3 & 3.1 & 4.2  & 5.2  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    152      & ~   & 2.3 & 3.1 & 4.1  & 5.2  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    153      & ~   & 2.2 & 3.0 & 4.1  & 5.1  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    154      & ~   & 2.2 & 3.0 & 4.0  & 5.1  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    155      & ~   & 2.2 & 3.0 & 4.0  & 5.0  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    156      & ~   & 2.2 & 2.9 & 4.0  & 5.0  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    157      & ~   & 2.1 & 2.9 & 3.9  & 4.9  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    158      & ~   & 2.1 & 2.9 & 3.9  & 4.9  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    159      & ~   & 2.1 & 2.8 & 3.8  & 4.8  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    160      & ~   & 2.1 & 2.8 & 3.8  & 4.8  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    161      & ~   & 2.0 & 2.8 & 3.7  & 4.7  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    162      & ~   & 2.0 & 2.8 & 3.7  & 4.6  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    163      & ~   & 2.0 & 2.8 & 3.7  & 4.6  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    164      & ~   & 2.0 & 2.7 & 3.6  & 4.5  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    165      & ~   & 2.0 & 2.7 & 3.6  & 4.5  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    166      & ~   & 1.9 & 2.7 & 3.6  & 4.5  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    167      & ~   & 1.9 & 2.6 & 3.5  & 4.4  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    168      & ~   & 1.9 & 2.6 & 3.5  & 4.4  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    169      & ~   & 1.9 & 2.6 & 3.5  & 4.4  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    170      & ~   & 1.8 & 2.6 & 3.4  & 4.3  & ~ & ~   & ~   & ~     & ~   & ~   \\
+    \end{tabular}
+\end{table}
 \newpage
 \end{document}
